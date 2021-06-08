@@ -1,0 +1,140 @@
+package tictactoe;
+import java.util.*;
+public class Main {
+     private static Scanner sc=new Scanner(System.in);
+      
+       private static String s;
+       private static char ch[][]=new char[3][3];
+       private static int a=0,x=0,y=0,c1,c2;
+       private static String res="";
+    public static void main(String[] args) {
+        
+       System.out.println("Enter cells: ");
+       s=sc.nextLine();
+       for(int i=0;i<3;i++)
+       {
+           for(int j =0;j<3;j++)
+           {
+               ch[i][j]=' ';
+               a++;
+           }
+       }
+        
+       System.out.println("---------");
+       for(int i=0;i<3;i++)
+       {
+           System.out.print("| ");
+           for(int j=0;j<3;j++)
+           {
+           System.out.print("  ");
+           }
+           System.out.println("|");
+       }
+       System.out.println("---------");
+       int chance=1;
+       while(true){
+       System.out.println("Enter the coordinates: ");
+       String[] ans=sc.nextLine().split(" ");
+       c1=Integer.parseInt(ans[0]);
+       c2=Integer.parseInt(ans[1]);
+       
+       if(c1>0&&c1<9&&c2>0&&c2<9){
+       if(c1>3||c1<1||c2>3||c2<1) System.out.println("Coordinates should be from 1 to 3!");
+       else if(ch[c1-1][c2-1]=='X'||ch[c1-1][c2-1]=='O') System.out.println("This cell is occupied! Choose another one!");
+    //    wins();
+    //    System.out.println(res);
+        else
+        {   if(chance%2!=0)
+                    {
+                      ch[c1-1][c2-1]='X';
+                        System.out.println("---------");
+                            for(int i=0;i<3;i++)
+                                {
+                                 System.out.print("| ");
+                                    for(int j=0;j<3;j++)
+                                        {
+                                         System.out.print(ch[i][j]+" ");
+                                        }
+                                 System.out.println("|");
+                                }
+                        System.out.println("---------");
+                chance++;
+                    }
+                else{
+                        ch[c1-1][c2-1]='O';
+                            System.out.println("---------");
+                            for(int i=0;i<3;i++)
+                                {
+                                 System.out.print("| ");
+                                 for(int j=0;j<3;j++)
+                                    {
+                                    System.out.print(ch[i][j]+" ");
+                                     }
+                                     System.out.println("|");
+                                }
+                                System.out.println("---------");
+                            chance++;
+                    }
+        }
+        wins();
+        if(!res.isEmpty()) {System.out.println(res);
+        System.exit(0);}
+       }
+       else System.out.println("You should enter numbers!");
+       } 
+    }
+    private static void wins()
+     {
+         int countx=0,counto=0,c=0;
+         if((ch[0][0]==ch[0][1]&&ch[0][1]==ch[0][2]&&ch[0][2]=='X')||(ch[1][0]==ch[1][1]&&ch[1][1]==ch[1][2]&&ch[1][2]=='X')||
+         (ch[2][0]==ch[2][1]&&ch[2][1]==ch[2][2]&&ch[2][2]=='X')||(ch[0][0]==ch[1][0]&&ch[1][0]==ch[2][0]&&ch[2][0]=='X')||
+         (ch[0][1]==ch[1][1]&&ch[1][1]==ch[2][1]&&ch[2][1]=='X')||(ch[0][2]==ch[1][2]&&ch[1][2]==ch[2][2]&&ch[2][2]=='X')||
+         (ch[0][0]==ch[1][1]&&ch[1][1]==ch[2][2]&&ch[2][2]=='X')||(ch[0][2]==ch[1][1]&&ch[1][1]==ch[2][0]&&ch[2][0]=='X'))
+         countx++;
+         if((ch[0][0]==ch[0][1]&&ch[0][1]==ch[0][2]&&ch[0][2]=='O')||(ch[1][0]==ch[1][1]&&ch[1][1]==ch[1][2]&&ch[1][2]=='O')||
+         (ch[2][0]==ch[2][1]&&ch[2][1]==ch[2][2]&&ch[2][2]=='O')||(ch[0][0]==ch[1][0]&&ch[1][0]==ch[2][0]&&ch[2][0]=='O')||
+         (ch[0][1]==ch[1][1]&&ch[1][1]==ch[2][1]&&ch[2][1]=='O')||(ch[0][2]==ch[1][2]&&ch[1][2]==ch[2][2]&&ch[2][2]=='O')||
+         (ch[0][0]==ch[1][1]&&ch[1][1]==ch[2][2]&&ch[2][2]=='O')||(ch[0][2]==ch[1][1]&&ch[1][1]==ch[2][0]&&ch[2][0]=='O'))
+         counto++;
+         if(countx==1) c++;
+         if(counto==1) c++;
+        //  if(c>1) impossible();             
+        //  else 
+         
+             if(counto==1&&c==1) res="O wins";
+             else if(countx==1&&c==1) res="X wins";
+             else draw();
+         
+     }
+     private static void draw()
+     { boolean check=true;;
+         for(int i=0;i<3;i++)
+         {
+             for(int j=0;j<3;j++)
+             {
+                 if((ch[i][j]!=' ')&&(ch[i][j]!='_'))
+                 check=true;
+                 else check=false;
+                if(check==false) break; 
+             }
+              if(check==false) break; 
+         }
+         if(check==true) res="Draw";
+        //  else impossible();
+     }
+    //  private static void impossible()
+    //  {
+    //      int cx=0,co=0;
+    //      for(int i=0;i<3;i++)
+    //      {
+    //          for(int j=0;j<3;j++)
+    //          {
+    //              if(ch[i][j]=='X') cx++;
+    //              else if(ch[i][j]=='O') co++;
+    //          }
+    //      }
+    //      if(cx>co||co>cx) res="Impossible";
+    //      else res="Game not finished";
+         
+    //  } 
+}
