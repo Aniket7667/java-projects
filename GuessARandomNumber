@@ -1,0 +1,29 @@
+import java.util.*;
+public class Main
+{
+	public static void main(String[] args) {
+			Scanner sc = new Scanner(System.in);
+		
+		System.out.println("Guess the number");
+		int n= (int)Math.round(Math.random()*1000);
+		int us=0;
+		boolean cont=false;
+		while(true)
+		{
+			us = sc.nextInt();
+			if(us<n)
+			System.out.println("Higher");
+			else if(us>n)
+			System.out.println("Lower");
+			else
+			{
+			System.out.println("Perfect thats the numebr"+ n);
+			break;
+			}
+			
+					
+		}
+	
+		System.out.println("You win ");
+	}
+}
